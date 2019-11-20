@@ -21,5 +21,14 @@
   "bugs": {
     "url": "https://github.com/HotelEngine/concierge/issues"
   },
-  "homepage": "https://github.com/HotelEngine/concierge#readme"
+  "homepage": "https://github.com/HotelEngine/concierge#readme",
+  "dependencies": {
+    "fast-xml-parser": "^3.14.0",
+    "got": "^10.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.11",
+    "tap": "^14.9.2",
+    "typescript": "^3.7.2"
+  }
 }
