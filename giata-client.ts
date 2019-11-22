@@ -1,75 +1,75 @@
-import * as Got from "got";
-import * as parser from "fast-xml-parser";
+import got, { Options, Got, Response } from 'got';
+import * as parser from 'fast-xml-parser';
 
 export default class GiataClient {
-  constructor(options: GiataClientOptions) {
-    const clientOptions: Got.GotJSONOptions = {
-      ...(options.gotOptions || {}),
-      baseUrl: "https://multicodes.giatamedia.com/",
-      json: true,
-      headers: {
-        Authorization: Buffer.from(
-          `Basic ${options.username}:${options.password}`
-        ).toString("base64")
-      }
-    };
-    this.options = options;
-    this.client = Got.extend(clientOptions);
-  }
+    constructor(options: GiataClientOptions) {
+        const clientOptions: Options = {
+            prefixUrl: 'https://multicodes.giatamedia.com/',
+            headers: {
+                Authorization: `Basic ${Buffer.from(`${options.username}:${options.password}`).toString('base64')}`
+            }
+        };
+        this.options = options;
+        this.client = got.extend(clientOptions);
+    }
 
-  private client: Got.GotInstance;
-  private basePath = "webservice/rest/1.latest";
-  private options: any;
-  private parse(res: Got.Response<string>) {
-    return parser.parse(res.body, {
-      ...this.options.parserOptions,
-      ...{
-        attrNodeName: "attributes",
-        attributeNamePrefix: "",
-        ignoreAttributes: false,
-        textNodeName: "text"
-      }
-    });
-  }
+    private client: Got;
+    private basePath = 'webservice/rest/1.latest';
+    private options: any;
+    private parse(xml) {
+        return parser.parse(xml, {
+            ...this.options.parserOptions,
+            attrNodeName: 'attributes',
+            attributeNamePrefix: '',
+            ignoreAttributes: false,
+            textNodeName: 'text'
+        });
+    }
 
-  public async listProperties(since?: Date, options?: object) {
-    return this.client
-      .get(
-        `${this.basePath}/properties/multi` + since
-          ? `/since/${since.toISOString().split("T")[0]}`
-          : "",
-        options
-      )
-      .then(this.parse);
-  }
+    private generateUrl(path: string, since?: Date): string {
+        return `${this.basePath}/${path}` + (since ? `/since/${since.toISOString().split('T')[0]}` : '');
+    }
 
-  public async listPropertiesMovedSince(since?: Date, options?: object) {
-    return this.client
-      .get(
-        `${this.basePath}/properties/moved` + since
-          ? `/since/${since.toISOString().split("T")[0]}`
-          : "",
-        options
-      )
-      .then(this.parse);
-  }
+    private async executeRequest(req): Promise<Response> {
+        const res = await this.client(req);
+        return {
+            ...res,
+            body: this.parse(res.body)
+        } as any;
+    }
 
-  public async getProperty(id: string, options: object) {
-    return this.client
-      .get(`${this.basePath}/properties/${id}`, options)
-      .then(this.parse);
-  }
+    public async listProperties(since?: Date): Promise<Response> {
+        return this.executeRequest({
+            method: 'GET',
+            pathname: this.generateUrl('properties/multi', since)
+        });
+    }
 
-  public async listHotelChains(options: object) {
-    return this.client.get(`${this.basePath}/chains`, options).then(this.parse);
-  }
+    public async listPropertiesMovedSince(since?: Date) {
+        return this.executeRequest({
+            method: 'GET',
+            pathname: this.generateUrl('properties/moved', since)
+        });
+    }
+
+    public async getProperty(id: string) {
+        return this.executeRequest({
+            method: 'GET',
+            pathname: this.generateUrl(`${this.basePath}/properties/${id}`)
+        });
+    }
+
+    public async listHotelChains() {
+        return this.executeRequest({
+            method: 'GET',
+            pathname: `${this.basePath}/chains`
+        });
+    }
 }
 
-// export default GiataClient
-
 interface GiataClientOptions {
-  gotOptions?: Got.GotJSONOptions;
-  username: string;
-  password: string;
-  parserOptions?: object;
+    gotOptions?: Options;
+    username: string;
+    password: string;
+    parserOptions?: object;
 }
