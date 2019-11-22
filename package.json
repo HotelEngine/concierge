@@ -4,7 +4,9 @@
   "description": "inventory index",
   "main": "index.js",
   "scripts": {
-    "test": "tap"
+    "test": "tap ./*.test.* --timeout=0 --node-arg=--inspect-brk=9229",
+    "test-cli": "tap ./*.test.* --timeout=120000",
+    "test-snapshot": "tap ./*.test.* --timeout=120000 --snapshot"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.11",
+    "nock": "^11.7.0",
     "tap": "^14.9.2",
     "typescript": "^3.7.2"
   }
