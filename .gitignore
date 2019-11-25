@@ -1,1 +1,7 @@
 .nyc_output
+.env
+**/*.js.map
+.idea
+.vscode/**
+**/*.d.ts
+**/*.js
