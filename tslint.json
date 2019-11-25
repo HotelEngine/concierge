@@ -1,8 +1,7 @@
 {
   "extends": [
     "tslint:recommended",
-    "tslint-config-prettier",
-    "tslint-eslint-rules"
+    "tslint-config-prettier"
   ],
   "linterOptions": {
     "exclude": [
@@ -33,14 +32,12 @@
         }
       }
     ],
-    "ter-padded-blocks": [
-      true,
-      {
-        "blocks": "always",
-        "classes": "always",
-        "switches": "never"
-      }
-    ]
+    "semicolon": [
+      false,
+      "never"
+    ],
+    "object-literal-sort-keys": false,
+    "ordered-imports": false
   },
   "jsRules": {}
 }
