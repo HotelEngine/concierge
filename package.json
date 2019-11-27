@@ -8,7 +8,11 @@
     "test-cli": "tap **/*.test.ts --timeout=120000",
     "test-snapshot": "tap **/*.test.ts --timeout=120000 --snapshot",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build-ts": "./node_modules/.bin/tsc"
+    "build-ts": "./node_modules/.bin/tsc",
+    "cdk": "cdk"
+  },
+  "bin": {
+    "cdk-workshop": "bin/cdk-workshop.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,14 @@
   },
   "homepage": "https://github.com/HotelEngine/concierge#readme",
   "dependencies": {
+    "@aws-cdk/assert": "^1.18.0",
+    "@aws-cdk/aws-apigateway": "^1.18.0",
+    "@aws-cdk/aws-dynamodb": "^1.18.0",
+    "@aws-cdk/aws-lambda": "^1.18.0",
+    "@aws-cdk/aws-sns": "^1.18.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.18.0",
+    "@aws-cdk/aws-sqs": "^1.18.0",
+    "@aws-cdk/core": "^1.18.0",
     "fast-xml-parser": "^3.14.0",
     "got": "^10.0.0-beta.2"
   },
