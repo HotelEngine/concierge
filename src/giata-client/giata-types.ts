@@ -39,7 +39,7 @@ export interface IGiataProperty {
     emails: IEmails
     urls: IUrls
     geoCodes: IGeoCodes
-    propertyCodes: IPropertyCodes
+    propertyCodes: IPropertyCodes | undefined
     chains: IChains
     ghgml: IMore
 }
@@ -93,6 +93,7 @@ export interface IAlternativeNameAttributes {
 export interface IPropertyAttributes {
     giataId: string
     lastUpdate: string
+    status: string
 }
 
 export interface IChains {
@@ -158,7 +159,7 @@ export interface IPhoneAttributes {
 }
 
 export interface IPropertyCodes {
-    provider: IProvider[]
+    provider: IProvider[] | IProvider
 }
 
 export interface IProvider {

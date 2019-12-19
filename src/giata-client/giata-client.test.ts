@@ -1,7 +1,7 @@
 import * as Tap from 'tap'
 import * as Nock from 'nock'
 import GiataClient from './giata-client'
-import ListPropertiesResponse from '../../giata-responses/list-properties/list-properties-since-xml'
+import ListPropertiesResponse from './giata-responses/list-properties/list-properties-since-xml'
 
 Tap.test('list properties', async test => {
     Nock('https://multicodes.giatamedia.com')

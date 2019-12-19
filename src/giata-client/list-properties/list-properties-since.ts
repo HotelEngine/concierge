@@ -1,4 +1,4 @@
-import { IGiataListPropertiesResponse } from '../../lib/giata-client/giata-types';
+import { IGiataListPropertiesResponse } from '../../giata-client/giata-types';
 
 export default {
   'properties': {

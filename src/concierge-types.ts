@@ -11,6 +11,7 @@ export interface IPropertyCode {
 export interface IProperty {
     location: IGeoLocation
     codes: IPropertyCode[]
-    id?: string
-    giataId: string
+    id: string
+    // giataId: string
+    updatedAt: string
 }

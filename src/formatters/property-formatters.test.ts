@@ -1,6 +1,6 @@
 import * as Tap from 'tap'
 import * as Formatters from './property-formatters'
-import ListPropertiesSinceResponse from '../../giata-responses/list-properties/list-properties-since'
+import ListPropertiesSinceResponse from '../giata-client/giata-responses/list-properties/list-properties-since'
 
 Tap.test('getGeo', test => {
     const result = Formatters.getGeoLocation(ListPropertiesSinceResponse.properties.property[0])

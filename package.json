@@ -8,11 +8,9 @@
     "test-cli": "tap **/*.test.ts --timeout=120000",
     "test-snapshot": "tap **/*.test.ts --timeout=120000 --snapshot",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build-ts": "./node_modules/.bin/tsc",
-    "cdk": "cdk"
-  },
-  "bin": {
-    "cdk-workshop": "bin/cdk-workshop.js"
+    "build": "tsc",
+    "package": "zip -r build.zip bin/* node_modules/*",
+    "deploy": "npm run build && npm run package && cdk deploy"
   },
   "repository": {
     "type": "git",
