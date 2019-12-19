@@ -11,6 +11,7 @@ export const handler = async event => {
             TableName: process.env.HISTORY_TABLE_NAME,
             Key: {
                 'id': {
+                    // why isnt this '1'
                     'S': 'id'
                 }
             },
@@ -21,18 +22,18 @@ export const handler = async event => {
     console.log('date is', JSON.stringify(response, undefined, 2))
 
     const client = new GiataClient({
-        username: process.env.GIATA_USERNAME!,
-        password: process.env.GIATA_PASSWORD!
+        username: 'Alex|hotelengine.com', // process.env.GIATA_USERNAME!,
+        password: 'BGvMwuPy' // process.env.GIATA_PASSWORD!
     })
 
     const since = response.timestamp ? new Date(response.timestamp) : new Date(0)
 
     const result = await client.listProperties({ since })
     const properties = result.body.properties
-    const offset = properties && properties.more && properties.more.attributes['xlink:href']
+    const moreUrl = properties && properties.more && properties.more.attributes['xlink:href']
 
-    if (offset) {
-        console.log('offset is ', JSON.stringify(offset))
+    if (moreUrl) {
+        console.log('moreUrl is ', JSON.stringify(moreUrl))
     }
 
     if (properties) {
