@@ -7,8 +7,13 @@
 -   `npm i -g aws-cdk`
 -   install and configure aws-cli `https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html`
 -   ask someone for aws permissions
--   `npm run build && npm run package && npm run test`
+-   `npm run build && npm run package && npm run test`)
 -   `cdk diff` -> should see asset names change
+
+## tests
+
+-   https://node-tap.org/docs/getting-started/
+-   note that snapshots need to be created with the `--snapshot` flag
 
 ## features
 
