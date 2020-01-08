@@ -47,8 +47,17 @@
 -   features
     -   run the giata indexer on a schedule
         -   https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/lambda-cron/
-    -   run the giata indexer recursivly
+    -   run the giata indexer recursivly so it correctly saves properties updated _since_
         -   make sure only one can run at a time
 -   param security
     -   `/concierge` ssm parameters (secure string vs string)
         -   secure strings not currently supported by cdk, update them someday
+
+## other stuff
+
+-   not all of giata properties contain lat/long data!
+
+    -   dynamo streams and/or another lambda could populate location data
+
+-   this data is not optimized for search, which public-api craves
+    -   we need a downstream endpoint that can quickly return property codes for a location
