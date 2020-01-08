@@ -28,6 +28,7 @@
 
 -   https://cdkworkshop.com/15-prerequisites.html
 -   https://github.com/aws-samples/aws-cdk-examples#TypeScript
+-   https://github.com/HotelEngine/he-api/blob/master/app/workers/inventory/giata/process_all_inventory.rb#L1
 
 ## todo
 
@@ -60,4 +61,8 @@
     -   dynamo streams and/or another lambda could populate location data
 
 -   this data is not optimized for search, which public-api craves
+
     -   we need a downstream endpoint that can quickly return property codes for a location
+
+-   dont conflate property mapping with "inventory"
+    -   this services responsibilities are close to being maxed out
